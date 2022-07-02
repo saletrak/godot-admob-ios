@@ -160,6 +160,8 @@ void AdMob::initialize(bool is_for_child_directed_treatment, const String &max_a
             GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @ [ [NSString stringWithCString: getDeviceId() encoding: NSUTF8StringEncoding] ];
             NSLog(@"on Testing Real Device: testDeviceIdentifiers: %@", [NSString stringWithCString: getDeviceId() encoding: NSUTF8StringEncoding]);
         #endif
+
+        GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ @"f0e3cb41deecdabfa0b4d242914fde1a" ];
     }
     
     [GADMobileAds.sharedInstance.requestConfiguration tagForChildDirectedTreatment:is_for_child_directed_treatment];
@@ -329,14 +331,15 @@ void AdMob::show_interstitial() {
     [interstitialObj show_interstitial];
 }
 
-void AdMob::load_rewarded(const String &ad_unit_id) {
+void AdMob::load_rewarded(const String &ad_unit_id, const String &user_id) {
     if (!initialized) {
         NSLog(@"AdMob Module not initialized");
         return;
     }
     
+    NSString *user_id_NSString = [NSString stringWithCString:user_id.utf8().get_data() encoding: NSUTF8StringEncoding];
     NSString *ad_unit_id_NSString = [NSString stringWithCString:ad_unit_id.utf8().get_data() encoding: NSUTF8StringEncoding];
-    [rewardedObj load_rewarded: ad_unit_id_NSString];
+    [rewardedObj load_rewarded: ad_unit_id_NSString user_id:user_id_NSString];
     
 }
 
