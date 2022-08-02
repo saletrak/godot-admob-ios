@@ -80,7 +80,7 @@
         void load_interstitial(const String &ad_unit_id);
         void show_interstitial();
         
-        void load_rewarded(const String &ad_unit_id);
+        void load_rewarded(const String &ad_unit_id, const String &user_id);
         void show_rewarded();
 
         void load_rewarded_interstitial(const String &ad_unit_id);

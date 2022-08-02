@@ -19,7 +19,8 @@
 }
 
 
-- (void) load_rewarded:(NSString*) ad_unit_id {
+- (void) load_rewarded:(NSString*) ad_unit_id  
+               user_id:(NSString*) u_id {
     NSLog(@"Calling load_rewarded");
     
     if (!initialized || loaded) {
@@ -31,6 +32,10 @@
     }
         
     GADRequest *request = [GADRequest request];
+    GADRewardedAd *rewardedAd = [[GADRewardedAd alloc] init];
+
+    rewarded.serverSideVerificationOptions = nil;
+
     [GADRewardedAd
          loadWithAdUnitID:ad_unit_id
                   request:request
@@ -48,6 +53,8 @@
           else{
               self->rewarded = ad;
               self->rewarded.fullScreenContentDelegate = self;
+            self->rewarded.serverSideVerificationOptions = [[GADServerSideVerificationOptions alloc] init];
+              self->rewarded.serverSideVerificationOptions.userIdentifier = u_id;
 
               NSLog(@"reward successfully loaded");
               AdMob::get_singleton()->emit_signal("rewarded_ad_loaded");

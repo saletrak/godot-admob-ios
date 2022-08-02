@@ -23,7 +23,7 @@
 }
 
 - (instancetype)init;
-- (void)load_rewarded: (NSString*) ad_unit_id;
+- (void)load_rewarded:(NSString*) ad_unit_id  user_id:(NSString*) u_id;
 - (void)show_rewarded;
 - (bool)get_is_rewarded_loaded;
 
